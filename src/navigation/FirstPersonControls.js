@@ -82,17 +82,21 @@ export class FirstPersonControls extends EventDispatcher {
 		};
 
 		let scroll = (e) => {
-			let speed = this.viewer.getMoveSpeed();
+			let chfov = this.viewer.getFOV();
 
 			if (e.delta < 0) {
-				speed = speed * 0.9;
+				chfov *= 0.9;
 			} else if (e.delta > 0) {
-				speed = speed / 0.9;
+				chfov /= 0.9;
 			}
 
-			speed = Math.max(speed, 0.1);
+			if (chfov > 120) {
+				chfov = 120;
+			}
 
-			this.viewer.setMoveSpeed(speed);
+			chfov = Math.max(chfov, 0.1);
+
+			this.viewer.setFOV(chfov);
 		};
 
 		let dblclick = (e) => {
