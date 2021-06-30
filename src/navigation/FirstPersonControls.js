@@ -31,6 +31,7 @@ export class FirstPersonControls extends EventDispatcher {
 
 		this.rotationSpeed = 200;
 		this.moveSpeed = 10;
+		this.speedMultiplier = 5;
 		this.lockElevation = false;
 
 		this.keys = {
@@ -38,8 +39,9 @@ export class FirstPersonControls extends EventDispatcher {
 			BACKWARD: ['S'.charCodeAt(0), 40],
 			LEFT: ['A'.charCodeAt(0), 37],
 			RIGHT: ['D'.charCodeAt(0), 39],
-			UP: ['R'.charCodeAt(0), 33],
-			DOWN: ['F'.charCodeAt(0), 34]
+			UP: [' '.charCodeAt(0), 32],
+			DOWN: ['Z'.charCodeAt(0), 34],
+			SPRINT: ['shift'.charCodeAt(0), 16]
 		};
 
 		this.fadeFactor = 50;
@@ -206,6 +208,7 @@ export class FirstPersonControls extends EventDispatcher {
 			let moveRight = this.keys.RIGHT.some(e => ih.pressedKeys[e]);
 			let moveUp = this.keys.UP.some(e => ih.pressedKeys[e]);
 			let moveDown = this.keys.DOWN.some(e => ih.pressedKeys[e]);
+			let moveFast = this.keys.SPRINT.some(e => ih.pressedKeys[e]);
 
 			if(this.lockElevation){
 				let dir = view.direction;
@@ -219,30 +222,54 @@ export class FirstPersonControls extends EventDispatcher {
 				} else if (moveBackward) {
 					this.translationWorldDelta.copy(dir.multiplyScalar(-this.viewer.getMoveSpeed()));
 				}
-			}else{
+			}else {
 				if (moveForward && moveBackward) {
 					this.translationDelta.y = 0;
 				} else if (moveForward) {
-					this.translationDelta.y = this.viewer.getMoveSpeed();
+					if (moveFast) {
+						this.translationDelta.y = this.viewer.getMoveSpeed() * this.speedMultiplier;
+					} else {
+						this.translationDelta.y = this.viewer.getMoveSpeed();
+					}
 				} else if (moveBackward) {
-					this.translationDelta.y = -this.viewer.getMoveSpeed();
+					if (moveFast) {
+						this.translationDelta.y = -this.viewer.getMoveSpeed() * this.speedMultiplier;
+					} else {
+						this.translationDelta.y = -this.viewer.getMoveSpeed();
+					}
 				}
 			}
 
 			if (moveLeft && moveRight) {
 				this.translationDelta.x = 0;
 			} else if (moveLeft) {
-				this.translationDelta.x = -this.viewer.getMoveSpeed();
+				if (moveFast) {
+					this.translationDelta.x = -this.viewer.getMoveSpeed() * this.speedMultiplier;
+				} else {
+					this.translationDelta.x = -this.viewer.getMoveSpeed();
+				}
 			} else if (moveRight) {
-				this.translationDelta.x = this.viewer.getMoveSpeed();
+				if (moveFast) {
+					this.translationDelta.x = this.viewer.getMoveSpeed() * this.speedMultiplier;
+				} else {
+					this.translationDelta.x = this.viewer.getMoveSpeed();
+				}
 			}
 
 			if (moveUp && moveDown) {
 				this.translationWorldDelta.z = 0;
 			} else if (moveUp) {
-				this.translationWorldDelta.z = this.viewer.getMoveSpeed();
+				if (moveFast) {
+					this.translationWorldDelta.z = this.viewer.getMoveSpeed() * this.speedMultiplier;
+				} else {
+					this.translationWorldDelta.z = this.viewer.getMoveSpeed();
+				}
 			} else if (moveDown) {
-				this.translationWorldDelta.z = -this.viewer.getMoveSpeed();
+				if (moveFast) {
+					this.translationWorldDelta.z = -this.viewer.getMoveSpeed() * this.speedMultiplier;
+				} else {
+					this.translationWorldDelta.z = -this.viewer.getMoveSpeed();
+				}
 			}
 		}
 

@@ -100,6 +100,7 @@ export class Viewer extends EventDispatcher{
 		this.classifications = ClassificationScheme.DEFAULT;
 
 		this.moveSpeed = 10;
+		this.speedMultiplier = 5;
 
 		this.lengthUnit = LengthUnits.METER;
 		this.lengthUnitDisplay = LengthUnits.METER;
