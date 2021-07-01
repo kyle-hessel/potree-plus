@@ -36,20 +36,31 @@ export class HorizontalPanel extends MeasurePanel{
 		elCoordiantesContainer.empty();
 		elCoordiantesContainer.append(this.createCoordinatesTable(this.measurement.points.map(p => p.position)));
 
-        //this logic needs to change for the horizontal measure ~K
+        //this and the code around line 795 on Measure.js influence behavior. ~K
 		{
 			let points = this.measurement.points;
 
-			let sorted = points.slice().sort((a, b) => a.position.z - b.position.z);
+            let sorted = points.slice().sort((a, b) => 
+            {
+                a.position.x - b.position.x;
+                a.position.y - b.position.y;
+            });
 			let lowPoint = sorted[0].position.clone();
-			let highPoint = sorted[sorted.length - 1].position.clone();
-			let min = lowPoint.z;
-			let max = highPoint.z;
-			let height = max - min;
-			height = height.toFixed(3);
+            let highPoint = sorted[sorted.length - 1].position.clone();
+            
+			let minX = lowPoint.x;
+            let maxX = highPoint.x;
+            let minY = lowPoint.y;
+            let maxY = highPoint.y;
 
-			this.elHeightLabel = this.elContent.find(`#horizontal_label`);
-			this.elHeightLabel.html(`<b>Horizontal:</b> ${height}`);
+            let deltaX = maxX - minX;
+            let deltaY = maxY - minY;
+            let horz = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+            
+			horz = horz.toFixed(3);
+
+			this.elHorizontalLabel = this.elContent.find(`#horizontal_label`);
+			this.elHorizontalLabel.html(`<b>Horizontal:</b> ${horz}`);
 		}
 	}
 };

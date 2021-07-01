@@ -148,7 +148,7 @@ export class Sidebar{
 			() => {
 				$('#menu_measurements').next().slideDown();
 				let measurement = this.measuringTool.startInsertion({
-					showDistances: true,
+					showDistances: false,
                     showHeight: false,
                     showHorizontal: true,
 					showArea: false,

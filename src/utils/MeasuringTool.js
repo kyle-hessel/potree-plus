@@ -364,7 +364,7 @@ export class MeasuringTool extends EventDispatcher{
 				}
             }
             
-            // horizontal label (needs modification ~K)
+            // horizontal label (displays measurements.. in the sidebar? ~K)
 			if (measure.showHorizontal) {
 				let label = measure.horizontalLabel;
 
@@ -378,14 +378,25 @@ export class MeasuringTool extends EventDispatcher{
 				{ // horizontal edge
 					let edge = measure.horizontalEdge;
 
-					let sorted = measure.points.slice().sort((a, b) => a.position.z - b.position.z);
+                    let sorted = measure.points.slice().sort((a, b) => 
+                    {
+                        a.position.x - b.position.x
+                        a.position.y - b.position.y;
+                    });
 					let lowPoint = sorted[0].position.clone();
-					let highPoint = sorted[sorted.length - 1].position.clone();
-					let min = lowPoint.z;
-					let max = highPoint.z;
+                    let highPoint = sorted[sorted.length - 1].position.clone();
+                    
+                    let minX = lowPoint.x;
+                    let maxX = highPoint.x;
+                    let minY = lowPoint.y;
+                    let maxY = highPoint.y;
 
-					let start = new THREE.Vector3(highPoint.x, highPoint.y, min);
-					let end = new THREE.Vector3(highPoint.x, highPoint.y, max);
+                    //let deltaX = maxX - minX;
+                    //let deltaY = maxY - minY;
+                    //let horz = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+
+					let start = new THREE.Vector3(minX, minY, highPoint.z);
+					let end = new THREE.Vector3(maxX, maxY, highPoint.z);
 
 					let lowScreen = lowPoint.clone().project(camera);
 					let startScreen = start.clone().project(camera);

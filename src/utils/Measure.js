@@ -30,7 +30,7 @@ function createHeightLine(){
 function createHeightLabel(){
 	const heightLabel = new TextSprite('');
 
-	heightLabel.setTextColor({r: 140, g: 250, b: 140, a: 1.0});
+    heightLabel.setTextColor({r: 140, g: 250, b: 140, a: 1.0});
 	heightLabel.setBorderColor({r: 0, g: 0, b: 0, a: 1.0});
 	heightLabel.setBackgroundColor({r: 0, g: 0, b: 0, a: 1.0});
 	heightLabel.fontsize = 16;
@@ -50,7 +50,7 @@ function createHorizontalLine(){
 	]);
 
 	let lineMaterial = new THREE.LineMaterial({ 
-		color: 0x00ff00, 
+		color: 0x0059ff, 
 		dashSize: 5, 
 		gapSize: 2,
 		linewidth: 2, 
@@ -69,7 +69,7 @@ function createHorizontalLine(){
 function createHorizontalLabel(){
 	const horizontalLabel = new TextSprite('');
 
-	horizontalLabel.setTextColor({r: 140, g: 250, b: 140, a: 1.0});
+    horizontalLabel.setTextColor({r: 31, g: 240, b: 255, a: 1.0});
 	horizontalLabel.setBorderColor({r: 0, g: 0, b: 0, a: 1.0});
 	horizontalLabel.setBackgroundColor({r: 0, g: 0, b: 0, a: 1.0});
 	horizontalLabel.fontsize = 16;
@@ -792,21 +792,31 @@ export class Measure extends THREE.Object3D {
 			}
         }
         
-        { // update horizontal stuff (also needs to be modified ~K)
+        { // update horizontal stuff (actual measurements ~K)
 			let horizontalEdge = this.horizontalEdge;
 			horizontalEdge.visible = this.showHorizontal;
 			this.horizontalLabel.visible = this.showHorizontal;
 
 			if (this.showHorizontal) {
-				let sorted = this.points.slice().sort((a, b) => a.position.z - b.position.z);
+                let sorted = this.points.slice().sort((a, b) => 
+                {
+                    a.position.x - b.position.x;
+                    a.position.y - b.position.y;
+                });
 				let lowPoint = sorted[0].position.clone();
-				let highPoint = sorted[sorted.length - 1].position.clone();
-				let min = lowPoint.z;
-				let max = highPoint.z;
-				let height = max - min;
+                let highPoint = sorted[sorted.length - 1].position.clone();
+                
+				let minX = lowPoint.x;
+                let maxX = highPoint.x;
+                let minY = lowPoint.y;
+                let maxY = highPoint.y;
 
-				let start = new THREE.Vector3(highPoint.x, highPoint.y, min);
-				let end = new THREE.Vector3(highPoint.x, highPoint.y, max);
+                let deltaX = maxX - minX;
+                let deltaY = maxY - minY;
+				let horz = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+
+				let start = new THREE.Vector3(minX, minY, highPoint.z);
+				let end = new THREE.Vector3(maxX, maxY, highPoint.z);
 
 				horizontalEdge.position.copy(lowPoint);
 
@@ -831,12 +841,12 @@ export class Measure extends THREE.Object3D {
 
 				let suffix = "";
 				if(this.lengthUnit != null && this.lengthUnitDisplay != null){
-					height = height / this.lengthUnit.unitspermeter * this.lengthUnitDisplay.unitspermeter;  //convert to meters then to the display unit
+					horz = horz / this.lengthUnit.unitspermeter * this.lengthUnitDisplay.unitspermeter;  //convert to meters then to the display unit
 					suffix = this.lengthUnitDisplay.code;
 				}
 
-				let txtHeight = Utils.addCommas(height.toFixed(2));
-				let msg = `${txtHeight} ${suffix}`;
+				let txtHorz = Utils.addCommas(Math.abs(horz).toFixed(2));
+				let msg = `${txtHorz} ${suffix}`;
 				this.horizontalLabel.setText(msg);
 			}
 		}
