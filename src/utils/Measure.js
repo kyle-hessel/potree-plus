@@ -41,6 +41,45 @@ function createHeightLabel(){
 	return heightLabel;
 }
 
+function createHorizontalLine(){
+	let lineGeometry = new THREE.LineGeometry();
+
+	lineGeometry.setPositions([
+		0, 0, 0,
+		0, 0, 0,
+	]);
+
+	let lineMaterial = new THREE.LineMaterial({ 
+		color: 0x00ff00, 
+		dashSize: 5, 
+		gapSize: 2,
+		linewidth: 2, 
+		resolution:  new THREE.Vector2(1000, 1000),
+	});
+
+	lineMaterial.depthTest = false;
+	const horizontalEdge = new THREE.Line2(lineGeometry, lineMaterial);
+	horizontalEdge.visible = false;
+
+	//this.add(this.horizontalEdge);
+	
+	return horizontalEdge;
+}
+
+function createHorizontalLabel(){
+	const horizontalLabel = new TextSprite('');
+
+	horizontalLabel.setTextColor({r: 140, g: 250, b: 140, a: 1.0});
+	horizontalLabel.setBorderColor({r: 0, g: 0, b: 0, a: 1.0});
+	horizontalLabel.setBackgroundColor({r: 0, g: 0, b: 0, a: 1.0});
+	horizontalLabel.fontsize = 16;
+	horizontalLabel.material.depthTest = false;
+	horizontalLabel.material.opacity = 1;
+	horizontalLabel.visible = false;
+
+	return horizontalLabel;
+}
+
 function createAreaLabel(){
 	const areaLabel = new TextSprite('');
 
@@ -290,7 +329,8 @@ export class Measure extends THREE.Object3D {
 		this._closed = true;
 		this._showAngles = false;
 		this._showCircle = false;
-		this._showHeight = false;
+        this._showHeight = false;
+        this._showHorizontal = true;
 		this._showEdges = true;
 		this._showAzimuth = false;
 		this.maxMarkers = Number.MAX_SAFE_INTEGER;
@@ -306,7 +346,9 @@ export class Measure extends THREE.Object3D {
 		this.coordinateLabels = [];
 
 		this.heightEdge = createHeightLine();
-		this.heightLabel = createHeightLabel();
+        this.heightLabel = createHeightLabel();
+        this.horizontalEdge = createHorizontalLine();
+        this.horizontalLabel = createHorizontalLabel();
 		this.areaLabel = createAreaLabel();
 		this.circleRadiusLabel = createCircleRadiusLabel();
 		this.circleRadiusLine = createCircleRadiusLine();
@@ -316,7 +358,9 @@ export class Measure extends THREE.Object3D {
 		this.azimuth = createAzimuth();
 
 		this.add(this.heightEdge);
-		this.add(this.heightLabel);
+        this.add(this.heightLabel);
+        this.add(this.horizontalEdge);
+		this.add(this.horizontalLabel);
 		this.add(this.areaLabel);
 		this.add(this.circleRadiusLabel);
 		this.add(this.circleRadiusLine);
@@ -746,6 +790,55 @@ export class Measure extends THREE.Object3D {
 				let msg = `${txtHeight} ${suffix}`;
 				this.heightLabel.setText(msg);
 			}
+        }
+        
+        { // update horizontal stuff (also needs to be modified ~K)
+			let horizontalEdge = this.horizontalEdge;
+			horizontalEdge.visible = this.showHorizontal;
+			this.horizontalLabel.visible = this.showHorizontal;
+
+			if (this.showHorizontal) {
+				let sorted = this.points.slice().sort((a, b) => a.position.z - b.position.z);
+				let lowPoint = sorted[0].position.clone();
+				let highPoint = sorted[sorted.length - 1].position.clone();
+				let min = lowPoint.z;
+				let max = highPoint.z;
+				let height = max - min;
+
+				let start = new THREE.Vector3(highPoint.x, highPoint.y, min);
+				let end = new THREE.Vector3(highPoint.x, highPoint.y, max);
+
+				horizontalEdge.position.copy(lowPoint);
+
+				horizontalEdge.geometry.setPositions([
+					0, 0, 0,
+					...start.clone().sub(lowPoint).toArray(),
+					...start.clone().sub(lowPoint).toArray(),
+					...end.clone().sub(lowPoint).toArray(),
+				]);
+
+				horizontalEdge.geometry.verticesNeedUpdate = true;
+				// horizontalEdge.geometry.computeLineDistances();
+				// horizontalEdge.geometry.lineDistancesNeedUpdate = true;
+				horizontalEdge.geometry.computeBoundingSphere();
+				horizontalEdge.computeLineDistances();
+
+				// horizontalEdge.material.dashSize = horizontal / 40;
+				// horizontalEdge.material.gapSize = horizontal / 40;
+
+				let horizontalLabelPosition = start.clone().add(end).multiplyScalar(0.5);
+				this.horizontalLabel.position.copy(horizontalLabelPosition);
+
+				let suffix = "";
+				if(this.lengthUnit != null && this.lengthUnitDisplay != null){
+					height = height / this.lengthUnit.unitspermeter * this.lengthUnitDisplay.unitspermeter;  //convert to meters then to the display unit
+					suffix = this.lengthUnitDisplay.code;
+				}
+
+				let txtHeight = Utils.addCommas(height.toFixed(2));
+				let msg = `${txtHeight} ${suffix}`;
+				this.horizontalLabel.setText(msg);
+			}
 		}
 
 		{ // update circle stuff
@@ -892,7 +985,16 @@ export class Measure extends THREE.Object3D {
 	set showHeight (value) {
 		this._showHeight = value;
 		this.update();
-	}
+    }
+    
+    get showHorizontal () {
+        return this._showHorizontal;
+    }
+
+    set showHorizontal (value) {
+        this._showHorizontal = value;
+        this.update();
+    }
 
 	get showArea () {
 		return this._showArea;

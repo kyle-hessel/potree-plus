@@ -188,7 +188,8 @@ export class MeasuringTool extends EventDispatcher{
 		measure.showArea = pick(args.showArea, false);
 		measure.showAngles = pick(args.showAngles, false);
 		measure.showCoordinates = pick(args.showCoordinates, false);
-		measure.showHeight = pick(args.showHeight, false);
+        measure.showHeight = pick(args.showHeight, false);
+        measure.showHorizontal = pick(args.showHorizontal, false);
 		measure.showCircle = pick(args.showCircle, false);
 		measure.showAzimuth = pick(args.showAzimuth, false);
 		measure.showEdges = pick(args.showEdges, true);
@@ -325,6 +326,57 @@ export class MeasuringTool extends EventDispatcher{
 
 				{ // height edge
 					let edge = measure.heightEdge;
+
+					let sorted = measure.points.slice().sort((a, b) => a.position.z - b.position.z);
+					let lowPoint = sorted[0].position.clone();
+					let highPoint = sorted[sorted.length - 1].position.clone();
+					let min = lowPoint.z;
+					let max = highPoint.z;
+
+					let start = new THREE.Vector3(highPoint.x, highPoint.y, min);
+					let end = new THREE.Vector3(highPoint.x, highPoint.y, max);
+
+					let lowScreen = lowPoint.clone().project(camera);
+					let startScreen = start.clone().project(camera);
+					let endScreen = end.clone().project(camera);
+
+					let toPixelCoordinates = v => {
+						let r = v.clone().addScalar(1).divideScalar(2);
+						r.x = r.x * clientWidth;
+						r.y = r.y * clientHeight;
+						r.z = 0;
+
+						return r;
+					};
+
+					let lowEL = toPixelCoordinates(lowScreen);
+					let startEL = toPixelCoordinates(startScreen);
+					let endEL = toPixelCoordinates(endScreen);
+
+					let lToS = lowEL.distanceTo(startEL);
+					let sToE = startEL.distanceTo(endEL);
+
+					edge.geometry.lineDistances = [0, lToS, lToS, lToS + sToE];
+					edge.geometry.lineDistancesNeedUpdate = true;
+
+					edge.material.dashSize = 10;
+					edge.material.gapSize = 10;
+				}
+            }
+            
+            // horizontal label (needs modification ~K)
+			if (measure.showHorizontal) {
+				let label = measure.horizontalLabel;
+
+				{
+					let distance = label.position.distanceTo(camera.position);
+					let pr = Utils.projectedRadius(1, camera, distance, clientWidth, clientHeight);
+					let scale = (70 / pr);
+					label.scale.set(scale, scale, scale);
+				}
+
+				{ // horizontal edge
+					let edge = measure.horizontalEdge;
 
 					let sorted = measure.points.slice().sort((a, b) => a.position.z - b.position.z);
 					let lowPoint = sorted[0].position.clone();

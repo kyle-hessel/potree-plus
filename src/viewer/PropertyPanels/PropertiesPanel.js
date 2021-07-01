@@ -17,6 +17,7 @@ import {AreaPanel} from "./AreaPanel.js";
 import {AnglePanel} from "./AnglePanel.js";
 import {CirclePanel} from "./CirclePanel.js";
 import {HeightPanel} from "./HeightPanel.js";
+import {HorizontalPanel} from "./HorizontalPanel.js";
 import {VolumePanel} from "./VolumePanel.js";
 import {ProfilePanel} from "./ProfilePanel.js";
 import {CameraPanel} from "./CameraPanel.js";
@@ -847,7 +848,8 @@ export class PropertiesPanel{
 			AREA: {panel: AreaPanel},
 			POINT: {panel: PointPanel},
 			ANGLE: {panel: AnglePanel},
-			HEIGHT: {panel: HeightPanel},
+            HEIGHT: {panel: HeightPanel},
+            HORIZONTAL: {panel: HorizontalPanel},
 			PROFILE: {panel: ProfilePanel},
 			VOLUME: {panel: VolumePanel},
 			CIRCLE: {panel: CirclePanel},
@@ -866,7 +868,9 @@ export class PropertiesPanel{
 					return TYPE.ANGLE;
 				} else if (measurement.showHeight) {
 					return TYPE.HEIGHT;
-				} else if (measurement.showCircle) {
+                } else if (measurement.showHorizontal) {
+                    return TYPE.HORIZONTAL;
+                } else if (measurement.showCircle) {
 					return TYPE.CIRCLE;
 				} else {
 					return TYPE.OTHER;

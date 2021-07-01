@@ -141,6 +141,28 @@ export class Sidebar{
 			}
 		));
 
+		// HORIZONTAL
+		elToolbar.append(this.createToolIcon(
+			Potree.resourcePath + '/icons/horizontal.svg',
+			'[title]tt.horizontal_measurement',
+			() => {
+				$('#menu_measurements').next().slideDown();
+				let measurement = this.measuringTool.startInsertion({
+					showDistances: true,
+                    showHeight: false,
+                    showHorizontal: true,
+					showArea: false,
+					closed: false,
+					maxMarkers: 2,
+					name: 'Horizontal'});
+
+				let measurementsRoot = $("#jstree_scene").jstree().get_json("measurements");
+				let jsonNode = measurementsRoot.children.find(child => child.data.uuid === measurement.uuid);
+				$.jstree.reference(jsonNode.id).deselect_all();
+				$.jstree.reference(jsonNode.id).select_node(jsonNode.id);
+			}
+		));
+
 		// CIRCLE
 		elToolbar.append(this.createToolIcon(
 			Potree.resourcePath + '/icons/circle.svg',
@@ -309,8 +331,7 @@ export class Sidebar{
 				<a href="#" download="measure.dxf"><img name="dxf_export_button" src="${dxfIcon}" class="button-icon" style="height: 24px" /></a>
 				<a href="#" download="potree.json"><img name="potree_export_button" src="${potreeIcon}" class="button-icon" style="height: 24px" /></a>
 			`);
-
-			let elDownloadJSON = elExport.find("img[name=geojson_export_button]").parent();
+let elDownloadJSON = elExport.find("img[name=geojson_export_button]").parent();
 			elDownloadJSON.click( (event) => {
 				let scene = this.viewer.scene;
 				let measurements = [...scene.measurements, ...scene.profiles, ...scene.volumes];

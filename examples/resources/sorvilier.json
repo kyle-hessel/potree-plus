@@ -194,7 +194,8 @@
 			"showArea": false,
 			"closed": false,
 			"showAngles": false,
-			"showHeight": false,
+            "showHeight": false,
+            "showHorizontal": false,
 			"color": [
 				1,
 				0,
@@ -226,7 +227,8 @@
 			"showArea": false,
 			"closed": true,
 			"showAngles": true,
-			"showHeight": false,
+            "showHeight": false,
+            "showHorizontal": false,
 			"color": [
 				1,
 				0,
@@ -248,7 +250,8 @@
 			"showArea": false,
 			"closed": true,
 			"showAngles": false,
-			"showHeight": false,
+            "showHeight": false,
+            "showHorizontal": false,
 			"color": [
 				1,
 				0,
@@ -275,7 +278,8 @@
 			"showArea": false,
 			"closed": false,
 			"showAngles": false,
-			"showHeight": true,
+            "showHeight": true,
+            "showHorizontal": false,
 			"color": [
 				1,
 				0,
@@ -312,7 +316,8 @@
 			"showArea": true,
 			"closed": true,
 			"showAngles": false,
-			"showHeight": false,
+            "showHeight": false,
+            "showHorizontal": false,
 			"color": [
 				1,
 				0,

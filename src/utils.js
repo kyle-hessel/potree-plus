@@ -819,7 +819,9 @@ export class Utils {
 				return `${Potree.resourcePath}/icons/angle.png`;
 			} else if (measurement.showHeight) {
 				return `${Potree.resourcePath}/icons/height.svg`;
-			} else {
+			} else if (measurement.showHorizontal) {
+                return `${Potree.resourcePath}/icons/horizontal.svg`;
+            } else {
 				return `${Potree.resourcePath}/icons/distance.svg`;
 			}
 		} else if (measurement instanceof Profile) {

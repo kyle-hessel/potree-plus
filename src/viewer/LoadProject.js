@@ -90,7 +90,8 @@ function loadMeasurement(viewer, data){
 	measure.showArea = data.showArea;
 	measure.closed = data.closed;
 	measure.showAngles = data.showAngles;
-	measure.showHeight = data.showHeight;
+    measure.showHeight = data.showHeight;
+    measure.showHorizontal = data.showHorizontal;
 	measure.showCircle = data.showCircle;
 	measure.showAzimuth = data.showAzimuth;
 	measure.showEdges = data.showEdges;
