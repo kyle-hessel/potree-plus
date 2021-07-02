@@ -103,7 +103,7 @@ export class Viewer extends EventDispatcher{
 		this.speedMultiplier = 5;
 
 		this.lengthUnit = LengthUnits.METER;
-		this.lengthUnitDisplay = LengthUnits.METER;
+		this.lengthUnitDisplay = LengthUnits.FEET;
 
 		this.showBoundingBox = false;
 		this.showAnnotations = true;
