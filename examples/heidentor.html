@@ -79,6 +79,115 @@
 			viewer.scene.view.position.set(13.856734292740617, -9.125174923658731, 14.563928417406354);
 			viewer.scene.view.lookAt(-3.5482630104475366, 2.728596783815762, 6.1406044783018725);
 		});
+
+		// NEW TOOL EXAMPLES ~K
+		{ // Point example
+			let measure = new Potree.Measure();
+			measure.name = "Point 1";
+			measure.closed = true;
+			measure.showDistances = false;
+			measure.showCoordinates = true;
+			measure.showHeight = false;
+			measure.addMarker(new THREE.Vector3(-0.695, 9.066, 12.863));
+				
+			viewer.scene.addMeasurement(measure);
+		}
+
+		{ // Distance example
+				let measure = new Potree.Measure();
+				measure.name = "Distance 1";
+				measure.closed = false;
+				measure.showDistances = true;
+				measure.showHeight = false;
+				measure.showHorizontal = false;
+				measure.addMarker(new THREE.Vector3(-1.592, -0.422, 12.298));
+				measure.addMarker(new THREE.Vector3(-0.662, 3.484, 9.012));
+				
+				viewer.scene.addMeasurement(measure);
+			}
+
+		{ // Height example
+			let measure = new Potree.Measure();
+			measure.name = "Height 1";
+			measure.closed = true;
+			measure.showDistances = false;
+			measure.showCoordinates = false;
+			measure.showHeight = true;
+			measure.showHorizontal = false;
+			measure.addMarker(new THREE.Vector3(-2.623, 9.734, 9.082));
+			measure.addMarker(new THREE.Vector3(-1.923, 10.529, 0.396));
+				
+			viewer.scene.addMeasurement(measure);
+		}
+
+		{ // Horizontal example
+			let measure = new Potree.Measure();
+			measure.name = "Horizontal 1";
+			measure.closed = true;
+			measure.showDistances = false;
+			measure.showCoordinates = false;
+			measure.showHeight = false;
+			measure.showHorizontal = true;
+			measure.addMarker(new THREE.Vector3(-1.578, 0.175, 7.023));
+			measure.addMarker(new THREE.Vector3(0.014, 5.945, 1.077));
+				
+			viewer.scene.addMeasurement(measure);
+		}
+
+		{ // Horizontal example 2
+			let measure = new Potree.Measure();
+			measure.name = "Horizontal 2";
+			measure.closed = true;
+			measure.showDistances = false;
+			measure.showCoordinates = false;
+			measure.showHeight = false;
+			measure.showHorizontal = true;
+			measure.addMarker(new THREE.Vector3(-2.539, -3.766, 7.261));
+			measure.addMarker(new THREE.Vector3(-4.432, -4.602, 0.081));
+				
+			viewer.scene.addMeasurement(measure);
+		}
+
+		{ // Elevation example
+			let measure = new Potree.Measure();
+			measure.name = "Elevation 1";
+			measure.closed = true;
+			measure.showDistances = false;
+			measure.showCoordinates = false;
+			measure.showElevation = true;
+			measure.showHeight = false;
+			measure.addMarker(new THREE.Vector3(-1.241, -3.471, 9.054));
+				
+			viewer.scene.addMeasurement(measure);
+		}
+
+		{ // Elevation example 2
+			let measure = new Potree.Measure();
+			measure.name = "Elevation 2";
+			measure.closed = true;
+			measure.showDistances = false;
+			measure.showCoordinates = false;
+			measure.showElevation = true;
+			measure.showHeight = false;
+			measure.addMarker(new THREE.Vector3(-1.089, -2.067, 12.939));
+				
+			viewer.scene.addMeasurement(measure);
+		}
+
+		{ // Elevation example 3
+			let measure = new Potree.Measure();
+			measure.name = "Elevation 3";
+			measure.closed = true;
+			measure.showDistances = false;
+			measure.showCoordinates = false;
+			measure.showElevation = true;
+			measure.showHeight = false;
+			measure.addMarker(new THREE.Vector3(0.116, -3.546, 1.597));
+				
+			viewer.scene.addMeasurement(measure);
+		}		
+
+
 		
 	</script>
 	
