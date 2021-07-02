@@ -325,6 +325,7 @@ export class Measure extends THREE.Object3D {
 		this.points = [];
 		this._showDistances = true;
 		this._showCoordinates = false;
+		this._showElevation = false;
 		this._showArea = false;
 		this._closed = true;
 		this._showAngles = false;
@@ -344,6 +345,7 @@ export class Measure extends THREE.Object3D {
 		this.edgeLabels = [];
 		this.angleLabels = [];
 		this.coordinateLabels = [];
+		this.elevationLabels = [];
 
 		this.heightEdge = createHeightLine();
         this.heightLabel = createHeightLabel();
@@ -453,6 +455,19 @@ export class Measure extends THREE.Object3D {
 			this.add(coordinateLabel);
 		}
 
+		{ // elevation labels
+			let elevationLabel = new TextSprite();
+			elevationLabel.setBorderColor({r: 0, g: 0, b: 0, a: 1.0});
+			elevationLabel.setBackgroundColor({r: 0, g: 0, b: 0, a: 1.0});
+			elevationLabel.setTextColor({r: 255, g: 199, b: 0, a: 1.0});
+			elevationLabel.fontsize = 16;
+			elevationLabel.material.depthTest = false;
+			elevationLabel.material.opacity = 1;
+			elevationLabel.visible = false;
+			this.elevationLabels.push(elevationLabel);
+			this.add(elevationLabel);
+		}
+
 		{ // Event Listeners
 			let drag = (e) => {
 				let I = Utils.getMousePointCloudIntersection(
@@ -516,7 +531,9 @@ export class Measure extends THREE.Object3D {
 
 		this.remove(this.edgeLabels[edgeIndex]);
 		this.edgeLabels.splice(edgeIndex, 1);
-		this.coordinateLabels.splice(index, 1);
+
+		if (!this.showElevation) this.coordinateLabels.splice(index, 1);
+		if (this.showElevation) this.elevationLabels.splice(index, 1);
 
 		this.remove(this.angleLabels[index]);
 		this.angleLabels.splice(index, 1);
@@ -643,13 +660,24 @@ export class Measure extends THREE.Object3D {
 			let position = point.position;
 			this.spheres[0].position.copy(position);
 
-			{ // coordinate labels
-				let coordinateLabel = this.coordinateLabels[0];
-				
-				let msg = position.toArray().map(p => Utils.addCommas(p.toFixed(2))).join(" / ");
-				coordinateLabel.setText(msg);
+			if (!this.showElevation) {
+				{ // coordinate labels
+					let coordinateLabel = this.coordinateLabels[0];
+						
+					let msg = position.toArray().map(p => Utils.addCommas(p.toFixed(2))).join(" / ");
+					coordinateLabel.setText(msg);
 
-				coordinateLabel.visible = this.showCoordinates;
+					coordinateLabel.visible = this.showCoordinates;
+				}
+			} else {
+				{ // coordinate labels
+					let elevationLabel = this.elevationLabels[0];
+						
+					let msg = "Elevation: " + String(position.z.toFixed(2));
+					elevationLabel.setText(msg);
+
+					elevationLabel.visible = this.showElevation;
+				}
 			}
 
 			return;
@@ -949,6 +977,15 @@ export class Measure extends THREE.Object3D {
 
 	set showCoordinates (value) {
 		this._showCoordinates = value;
+		this.update();
+	}
+
+	get showElevation () {
+		return this._showElevation;
+	}
+
+	set showElevation (value) {
+		this._showElevation = value;
 		this.update();
 	}
 

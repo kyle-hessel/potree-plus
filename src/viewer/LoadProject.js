@@ -87,6 +87,7 @@ function loadMeasurement(viewer, data){
 	measure.name = data.name;
 	measure.showDistances = data.showDistances;
 	measure.showCoordinates = data.showCoordinates;
+	measure.showElevation = data.showElevation;
 	measure.showArea = data.showArea;
 	measure.closed = data.closed;
 	measure.showAngles = data.showAngles;

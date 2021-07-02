@@ -13,6 +13,7 @@ import {Gradients} from "../../materials/Gradients.js";
 import {MeasurePanel} from "./MeasurePanel.js";
 import {DistancePanel} from "./DistancePanel.js";
 import {PointPanel} from "./PointPanel.js";
+import {ElevationPanel} from "./ElevationPanel.js";
 import {AreaPanel} from "./AreaPanel.js";
 import {AnglePanel} from "./AnglePanel.js";
 import {CirclePanel} from "./CirclePanel.js";
@@ -847,6 +848,7 @@ export class PropertiesPanel{
 			DISTANCE: {panel: DistancePanel},
 			AREA: {panel: AreaPanel},
 			POINT: {panel: PointPanel},
+			ELEVATION: {panel: ElevationPanel},
 			ANGLE: {panel: AnglePanel},
             HEIGHT: {panel: HeightPanel},
             HORIZONTAL: {panel: HorizontalPanel},
@@ -862,8 +864,10 @@ export class PropertiesPanel{
 					return TYPE.DISTANCE;
 				} else if (measurement.showDistances && measurement.showArea && !measurement.showAngles) {
 					return TYPE.AREA;
-				} else if (measurement.maxMarkers === 1) {
+				} else if (measurement.maxMarkers === 1 && measurement.showCoordinates && !measurement.showElevation) {
 					return TYPE.POINT;
+				} else if (measurement.maxMarkers === 1 && measurement.showElevation && !measurement.showCoordinates) {
+					return TYPE.ELEVATION;
 				} else if (!measurement.showDistances && !measurement.showArea && measurement.showAngles) {
 					return TYPE.ANGLE;
 				} else if (measurement.showHeight) {

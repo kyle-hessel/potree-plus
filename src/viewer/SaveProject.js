@@ -95,6 +95,7 @@ function createMeasurementData(measurement){
 		points: measurement.points.map(p => p.position.toArray()),
 		showDistances: measurement.showDistances,
 		showCoordinates: measurement.showCoordinates,
+		showElevation: measurement.showElevation,
 		showArea: measurement.showArea,
 		closed: measurement.closed,
 		showAngles: measurement.showAngles,

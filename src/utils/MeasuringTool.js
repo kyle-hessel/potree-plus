@@ -188,6 +188,7 @@ export class MeasuringTool extends EventDispatcher{
 		measure.showArea = pick(args.showArea, false);
 		measure.showAngles = pick(args.showAngles, false);
 		measure.showCoordinates = pick(args.showCoordinates, false);
+		measure.showElevation = pick(args.showElevation, false);
         measure.showHeight = pick(args.showHeight, false);
         measure.showHorizontal = pick(args.showHorizontal, false);
 		measure.showCircle = pick(args.showCircle, false);
@@ -283,35 +284,71 @@ export class MeasuringTool extends EventDispatcher{
 				label.scale.set(scale, scale, scale);
 			}
 
-			// coordinate labels
-			for (let j = 0; j < measure.coordinateLabels.length; j++) {
-				let label = measure.coordinateLabels[j];
-				let sphere = measure.spheres[j];
+			if (!measure.showElevation) {
+				// coordinate labels
+				for (let j = 0; j < measure.coordinateLabels.length; j++) {
+					let label = measure.coordinateLabels[j];
+					let sphere = measure.spheres[j];
 
-				let distance = camera.position.distanceTo(sphere.getWorldPosition(new THREE.Vector3()));
+					let distance = camera.position.distanceTo(sphere.getWorldPosition(new THREE.Vector3()));
 
-				let screenPos = sphere.getWorldPosition(new THREE.Vector3()).clone().project(camera);
-				screenPos.x = Math.round((screenPos.x + 1) * clientWidth / 2);
-				screenPos.y = Math.round((-screenPos.y + 1) * clientHeight / 2);
-				screenPos.z = 0;
-				screenPos.y -= 30;
+					let screenPos = sphere.getWorldPosition(new THREE.Vector3()).clone().project(camera);
+					screenPos.x = Math.round((screenPos.x + 1) * clientWidth / 2);
+					screenPos.y = Math.round((-screenPos.y + 1) * clientHeight / 2);
+					screenPos.z = 0;
+					screenPos.y -= 30;
 
-				let labelPos = new THREE.Vector3( 
-					(screenPos.x / clientWidth) * 2 - 1, 
-					-(screenPos.y / clientHeight) * 2 + 1, 
-					0.5 );
-				labelPos.unproject(camera);
-				if(this.viewer.scene.cameraMode == CameraMode.PERSPECTIVE) {
-					let direction = labelPos.sub(camera.position).normalize();
-					labelPos = new THREE.Vector3().addVectors(
-						camera.position, direction.multiplyScalar(distance));
+					let labelPos = new THREE.Vector3( 
+						(screenPos.x / clientWidth) * 2 - 1, 
+						-(screenPos.y / clientHeight) * 2 + 1, 
+						0.5 );
+					labelPos.unproject(camera);
+					if(this.viewer.scene.cameraMode == CameraMode.PERSPECTIVE) {
+						let direction = labelPos.sub(camera.position).normalize();
+						labelPos = new THREE.Vector3().addVectors(
+							camera.position, direction.multiplyScalar(distance));
 
+					}
+					label.position.copy(labelPos);
+					let pr = Utils.projectedRadius(1, camera, distance, clientWidth, clientHeight);
+					let scale = (70 / pr);
+					label.scale.set(scale, scale, scale);
 				}
-				label.position.copy(labelPos);
-				let pr = Utils.projectedRadius(1, camera, distance, clientWidth, clientHeight);
-				let scale = (70 / pr);
-				label.scale.set(scale, scale, scale);
 			}
+
+			
+			if (measure.showElevation) {
+				// elevation labels
+				for (let j = 0; j < measure.elevationLabels.length; j++) {
+					let label = measure.elevationLabels[j];
+					let sphere = measure.spheres[j];
+
+					let distance = camera.position.distanceTo(sphere.getWorldPosition(new THREE.Vector3()));
+
+					let screenPos = sphere.getWorldPosition(new THREE.Vector3()).clone().project(camera);
+					screenPos.x = Math.round((screenPos.x + 1) * clientWidth / 2);
+					screenPos.y = Math.round((-screenPos.y + 1) * clientHeight / 2);
+					screenPos.z = 0;
+					screenPos.y -= 30;
+
+					let labelPos = new THREE.Vector3( 
+						(screenPos.x / clientWidth) * 2 - 1, 
+						-(screenPos.y / clientHeight) * 2 + 1, 
+						0.5 );
+					labelPos.unproject(camera);
+					if(this.viewer.scene.cameraMode == CameraMode.PERSPECTIVE) {
+						let direction = labelPos.sub(camera.position).normalize();
+						labelPos = new THREE.Vector3().addVectors(
+							camera.position, direction.multiplyScalar(distance));
+
+					}
+					label.position.copy(labelPos);
+					let pr = Utils.projectedRadius(1, camera, distance, clientWidth, clientHeight);
+					let scale = (70 / pr);
+					label.scale.set(scale, scale, scale);
+				}
+			}
+			
 
 			// height label
 			if (measure.showHeight) {
@@ -464,7 +501,9 @@ export class MeasuringTool extends EventDispatcher{
 					...measure.edgeLabels, 
 					...measure.angleLabels, 
 					...measure.coordinateLabels,
+					...measure.elevationLabels,
 					measure.heightLabel,
+					measure.horizontalLabel,
 					measure.areaLabel,
 					measure.circleRadiusLabel,
 				];

@@ -16,6 +16,7 @@
 	"tt": {
 		"angle_measurement": "Angle measurement",
 		"point_measurement": "Point measurement",
+		"spot_measurement": "Spot elevation measurement",
 		"distance_measurement": "Distance measurement",
         "height_measurement": "Height measurement",
         "horizontal_measurement": "Horizontal measurement",
@@ -32,7 +33,7 @@
 		"clip_plane_z": "Clip plane on z axis",
 		"remove_all_measurement": "Remove all measurements",
 		"left_view_control": "Left view",
-		"right_view_control": "Righ view",
+		"right_view_control": "Right view",
 		"front_view_control": "Front view",
 		"back_view_control": "Back view",
 		"top_view_control": "Top view",

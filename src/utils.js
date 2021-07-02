@@ -813,8 +813,10 @@ export class Utils {
 				return `${Potree.resourcePath}/icons/distance.svg`;
 			} else if (measurement.showDistances && measurement.showArea && !measurement.showAngles) {
 				return `${Potree.resourcePath}/icons/area.svg`;
-			} else if (measurement.maxMarkers === 1) {
+			} else if (measurement.maxMarkers === 1 && measurement.showCoordinates) {
 				return `${Potree.resourcePath}/icons/point.svg`;
+			} else if (measurement.maxMarkers === 1 && measurement.showElevation) {
+				return `${Potree.resourcePath}/icons/spot_elevation.svg`;
 			} else if (!measurement.showDistances && !measurement.showArea && measurement.showAngles) {
 				return `${Potree.resourcePath}/icons/angle.png`;
 			} else if (measurement.showHeight) {
