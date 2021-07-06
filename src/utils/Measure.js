@@ -729,7 +729,7 @@ export class Measure extends THREE.Object3D {
 				}
 			}
 
-			{ // edge labels
+			{ // edge labels (distance tool labels ~K)
 				let edgeLabel = this.edgeLabels[i];
 
 				let center = new THREE.Vector3().add(point.position);
@@ -746,7 +746,7 @@ export class Measure extends THREE.Object3D {
 				}
 
 				let txtLength = Utils.addCommas(distance.toFixed(2));
-				edgeLabel.setText(`${txtLength} ${suffix}`);
+				edgeLabel.setText(`3D: ${txtLength} ${suffix}`);
 				edgeLabel.visible = this.showDistances && (index < lastIndex || this.closed) && this.points.length >= 2 && distance > 0;
 			}
 
@@ -815,7 +815,7 @@ export class Measure extends THREE.Object3D {
 				}
 
 				let txtHeight = Utils.addCommas(height.toFixed(2));
-				let msg = `${txtHeight} ${suffix}`;
+				let msg = `Vt: ${txtHeight} ${suffix}`;
 				this.heightLabel.setText(msg);
 			}
         }
@@ -874,7 +874,7 @@ export class Measure extends THREE.Object3D {
 				}
 
 				let txtHorz = Utils.addCommas(Math.abs(horz).toFixed(2));
-				let msg = `${txtHorz} ${suffix}`;
+				let msg = `Hz: ${txtHorz} ${suffix}`;
 				this.horizontalLabel.setText(msg);
 			}
 		}
