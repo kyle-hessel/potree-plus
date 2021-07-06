@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 32 32"
+   preserveAspectRatio="xMidYMid"
+   zoomAndPan="magnify"
+   version="1.1"
+   id="svg4863"
+   sodipodi:docname="topdown.svg"
+   width="32"
+   height="32"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata4869">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4867">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="1.5340622 : 25.978553 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="75.503784 : 20.609335 : 1"
+       inkscape:persp3d-origin="25 : 12.333333 : 1"
+       id="perspective4964" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect4925"
+       is_visible="true"
+       steps="1"
+       threshold="0.0021"
+       smooth_angles="0"
+       helper_size="5"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     id="namedview4865"
+     showgrid="false"
+     inkscape:pagecheckerboard="true"
+     fit-margin-top="175"
+     fit-margin-bottom="175"
+     fit-margin-left="150"
+     fit-margin-right="150"
+     inkscape:zoom="14.75"
+     inkscape:cx="27.052377"
+     inkscape:cy="14.166448"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4863" />
+  <rect
+     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.58958042;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+     id="rect4980"
+     width="29.088676"
+     height="3.8351552"
+     x="1.4556618"
+     y="3.2363336" />
+  <path
+     sodipodi:type="star"
+     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.70078743;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+     id="path4982"
+     sodipodi:sides="3"
+     sodipodi:cx="20"
+     sodipodi:cy="19.343987"
+     sodipodi:r1="11.838228"
+     sodipodi:r2="5.9191141"
+     sodipodi:arg1="-0.52359878"
+     sodipodi:arg2="0.52359878"
+     inkscape:flatsided="false"
+     inkscape:rounded="0"
+     inkscape:randomized="0"
+     d="M 30.252206,13.424872 25.126103,22.303544 20,31.182215 14.873897,22.303544 9.7477936,13.424872 20,13.424872 Z"
+     inkscape:transform-center-y="2.1445864"
+     transform="matrix(1,0,0,0.72463091,-4,7.027296)" />
+  <rect
+     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.37497544;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+     id="rect4980-9"
+     width="21.764505"
+     height="3.8351552"
+     x="4.0033665"
+     y="-17.917578"
+     transform="rotate(90)" />
+</svg>
