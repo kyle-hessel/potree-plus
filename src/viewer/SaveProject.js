@@ -241,7 +241,7 @@ export function saveProject(viewer) {
 	const scene = viewer.scene;
 
 	const data = {
-		type: "Potree",
+		type: "Photo360",
 		version: 1.7,
 		settings: createSettingsData(viewer),
 		view: createViewData(viewer),

@@ -331,8 +331,8 @@ function loadClassification(viewer, data){
 
 export async function loadProject(viewer, data){
 
-	if(data.type !== "Potree"){
-		console.error("not a valid Potree project");
+	if(data.type !== "Photo360"){
+		console.error("not a valid Photo360 project.");
 		return;
 	}
 

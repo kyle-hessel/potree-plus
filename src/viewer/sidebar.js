@@ -368,13 +368,13 @@ export class Sidebar{
 
 			let geoJSONIcon = `${Potree.resourcePath}/icons/file_geojson.svg`;
 			let dxfIcon = `${Potree.resourcePath}/icons/file_dxf.svg`;
-			let potreeIcon = `${Potree.resourcePath}/icons/file_potree.svg`;
+			let p360Icon = `${Potree.resourcePath}/icons/file_p360.svg`;
 
 			elExport.append(`
 				Export: <br>
 				<a href="#" download="measure.json"><img name="geojson_export_button" src="${geoJSONIcon}" class="button-icon" style="height: 24px" /></a>
 				<a href="#" download="measure.dxf"><img name="dxf_export_button" src="${dxfIcon}" class="button-icon" style="height: 24px" /></a>
-				<a href="#" download="potree.json"><img name="potree_export_button" src="${potreeIcon}" class="button-icon" style="height: 24px" /></a>
+				<a href="#" download="3D.p360"><img name="p360_export_button" src="${p360Icon}" class="button-icon" style="height: 24px" /></a>
 			`);
 			let elDownloadJSON = elExport.find("img[name=geojson_export_button]").parent();
 			elDownloadJSON.click( (event) => {
@@ -408,14 +408,14 @@ export class Sidebar{
 				}
 			});
 
-			let elDownloadPotree = elExport.find("img[name=potree_export_button]").parent();
-			elDownloadPotree.click( (event) => {
+			let elDownloadP360 = elExport.find("img[name=p360_export_button]").parent();
+			elDownloadP360.click( (event) => {
 
 				let data = Potree.saveProject(this.viewer);
 				let dataString = JSON.stringify(data, null, "\t")
 
 				let url = window.URL.createObjectURL(new Blob([dataString], {type: 'data:application/octet-stream'}));
-				elDownloadPotree.attr('href', url);
+				elDownloadP360.attr('href', url);
 			});
 		}
 

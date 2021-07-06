@@ -929,7 +929,7 @@ export class Viewer extends EventDispatcher{
 		const json = await response.json();
 		// const json = JSON.parse(text);
 
-		if(json.type === "Potree"){
+		if(json.type === "Photo360"){
 			Potree.loadProject(viewer, json);
 		}
 
@@ -1229,20 +1229,20 @@ export class Viewer extends EventDispatcher{
 
 				const file = item.getAsFile();
 
-				const isJson = file.name.toLowerCase().endsWith(".json");
+				const isP360 = file.name.toLowerCase().endsWith(".p360");
 				const isGeoPackage = file.name.toLowerCase().endsWith(".gpkg");
 
-				if(isJson){
+				if(isP360){
 					try{
 
 						const text = await file.text();
 						const json = JSON.parse(text);
 
-						if(json.type === "Potree"){
+						if(json.type === "Photo360"){
 							Potree.loadProject(viewer, json);
 						}
 					}catch(e){
-						console.error("failed to parse the dropped file as JSON");
+						console.error("failed to parse the dropped file as P360");
 						console.error(e);
 					}
 				}else if(isGeoPackage){
