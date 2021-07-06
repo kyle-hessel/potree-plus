@@ -20,6 +20,7 @@
 		"distance_measurement": "Distance measurement",
         "height_measurement": "Height measurement",
         "horizontal_measurement": "Horizontal measurement",
+		"multitool_measurement": "Multitool measurement",
 		"circle_measurement": "Circle measurement",
 		"area_measurement": "Area measurement",
 		"volume_measurement": "Volume measurement",

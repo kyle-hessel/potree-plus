@@ -186,6 +186,28 @@ export class Sidebar{
 			}
 		));
 
+		// MULTITOOL
+		elToolbar.append(this.createToolIcon(
+			Potree.resourcePath + '/icons/multitool.svg',
+			'[title]tt.multitool_measurement',
+			() => {
+				$('#menu_measurements').next().slideDown();
+				let measurement = this.measuringTool.startInsertion({
+					showDistances: true,
+                    showHeight: true,
+                    showHorizontal: true,
+					showArea: false,
+					closed: false,
+					maxMarkers: 2,
+					name: '3D measurement'});
+
+				let measurementsRoot = $("#jstree_scene").jstree().get_json("measurements");
+				let jsonNode = measurementsRoot.children.find(child => child.data.uuid === measurement.uuid);
+				$.jstree.reference(jsonNode.id).deselect_all();
+				$.jstree.reference(jsonNode.id).select_node(jsonNode.id);
+			}
+		));
+
 		// CIRCLE
 		elToolbar.append(this.createToolIcon(
 			Potree.resourcePath + '/icons/circle.svg',
