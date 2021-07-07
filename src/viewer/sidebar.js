@@ -366,16 +366,19 @@ export class Sidebar{
 		{
 			let elExport = elScene.next().find("#scene_export");
 
-			let geoJSONIcon = `${Potree.resourcePath}/icons/file_geojson.svg`;
+			//let geoJSONIcon = `${Potree.resourcePath}/icons/file_geojson.svg`;
 			let dxfIcon = `${Potree.resourcePath}/icons/file_dxf.svg`;
 			let p360Icon = `${Potree.resourcePath}/icons/file_p360.svg`;
 
 			elExport.append(`
 				Export: <br>
-				<a href="#" download="measure.json"><img name="geojson_export_button" src="${geoJSONIcon}" class="button-icon" style="height: 24px" /></a>
 				<a href="#" download="measure.dxf"><img name="dxf_export_button" src="${dxfIcon}" class="button-icon" style="height: 24px" /></a>
 				<a href="#" download="3D.p360"><img name="p360_export_button" src="${p360Icon}" class="button-icon" style="height: 24px" /></a>
 			`);
+			// Put this back in the tempate literal directly above if reinserting.
+			// <a href="#" download="measure.json"><img name="geojson_export_button" src="${geoJSONIcon}" class="button-icon" style="height: 24px" /></a>
+
+			/*
 			let elDownloadJSON = elExport.find("img[name=geojson_export_button]").parent();
 			elDownloadJSON.click( (event) => {
 				let scene = this.viewer.scene;
@@ -391,6 +394,7 @@ export class Sidebar{
 					event.preventDefault();
 				}
 			});
+			*/
 
 			let elDownloadDXF = elExport.find("img[name=dxf_export_button]").parent();
 			elDownloadDXF.click( (event) => {
