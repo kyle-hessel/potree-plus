@@ -1408,18 +1408,24 @@ export class Sidebar{
 		let lblMoveSpeed = $('#lblMoveSpeed');
 
 		elNavigation.append(this.createToolIcon(
-			Potree.resourcePath + '/icons/earth_controls_1.png',
-			'[title]tt.earth_control',
-			() => { this.viewer.setControls(this.viewer.earthControls); }
-		));
-
-		elNavigation.append(this.createToolIcon(
-			Potree.resourcePath + '/icons/fps_controls.svg',
+			Potree.resourcePath + '/icons/setupcontrols.svg',
 			'[title]tt.flight_control',
 			() => {
 				this.viewer.setControls(this.viewer.fpControls);
 				this.viewer.fpControls.lockElevation = false;
 			}
+		));
+
+		elNavigation.append(this.createToolIcon(
+			Potree.resourcePath + '/icons/orbit_controls.svg',
+			'[title]tt.orbit_control',
+			() => { this.viewer.setControls(this.viewer.orbitControls); }
+		));
+
+		elNavigation.append(this.createToolIcon(
+			Potree.resourcePath + '/icons/earth_controls_1.png',
+			'[title]tt.earth_control',
+			() => { this.viewer.setControls(this.viewer.earthControls); }
 		));
 
 		elNavigation.append(this.createToolIcon(
@@ -1429,12 +1435,6 @@ export class Sidebar{
 				this.viewer.setControls(this.viewer.fpControls);
 				this.viewer.fpControls.lockElevation = true;
 			}
-		));
-
-		elNavigation.append(this.createToolIcon(
-			Potree.resourcePath + '/icons/orbit_controls.svg',
-			'[title]tt.orbit_control',
-			() => { this.viewer.setControls(this.viewer.orbitControls); }
 		));
 
 		elNavigation.append(this.createToolIcon(
@@ -1469,7 +1469,7 @@ export class Sidebar{
 		));
 
 
-		elNavigation.append("<br>");
+		//elNavigation.append("<br>");
 
 
 		elNavigation.append(this.createToolIcon(

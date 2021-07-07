@@ -41,7 +41,7 @@
 		"bottom_view_control": "Bottom view",
 		"focus_control": "Full extent",
 		"orbit_control": "Orbit control",
-		"flight_control": "Fly control",
+		"flight_control": "Setup control",
 		"heli_control": "Helicopter control",
 		"earth_control": "Earth control",
 		"perspective_camera_control": "Perspective camera",
