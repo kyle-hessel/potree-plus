@@ -367,7 +367,7 @@ export class Sidebar{
 			let elExport = elScene.next().find("#scene_export");
 
 			//let geoJSONIcon = `${Potree.resourcePath}/icons/file_geojson.svg`;
-			let dxfIcon = `${Potree.resourcePath}/icons/file_dxf.svg`;
+			let dxfIcon = `${Potree.resourcePath}/icons/file_cad.svg`;
 			let p360Icon = `${Potree.resourcePath}/icons/file_p360.svg`;
 
 			elExport.append(`
