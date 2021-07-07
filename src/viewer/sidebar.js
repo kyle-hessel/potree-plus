@@ -1584,7 +1584,7 @@ export class Sidebar{
 				}
 			});
 
-			let currentQuality = this.viewer.useHQ ? "hq" : "standard";
+			let currentQuality = "hq" //this.viewer.useHQ ? "hq" : "standard";
 			elSplatQuality.find(`input[value=${currentQuality}]`).trigger("click");
 		}
 
