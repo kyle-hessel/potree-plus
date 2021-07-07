@@ -242,7 +242,7 @@ export class Viewer extends EventDispatcher{
 			this.setPointBudget(1*1000*1000);
 			this.setShowBoundingBox(false);
 			this.setFreeze(false);
-			this.setControls(this.orbitControls);
+			this.setControls(this.fpControls); //default to FirstPersonControls
 			this.setBackground('gradient');
 
 			this.scaleFactor = 1;
