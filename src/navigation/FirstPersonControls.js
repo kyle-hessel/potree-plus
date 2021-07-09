@@ -86,9 +86,9 @@ export class FirstPersonControls extends EventDispatcher {
 		let scroll = (e) => {
 			let chfov = this.viewer.getFOV();
 
-			if (e.delta < 0) {
+			if (e.delta > 0) {
 				chfov *= 0.9;
-			} else if (e.delta > 0) {
+			} else if (e.delta < 0) {
 				chfov /= 0.9;
 			}
 
