@@ -47,10 +47,11 @@ export class Compass{
 	}
 
 	createElement(){
-		const style = `style="position: absolute; top: 10px; right: 10px; z-index: 10000; width: 64px;"`;
-		const img = $(`<img src="${Potree.resourcePath}/images/compas.svg" ${style} />`);
+		const style = `style="position: absolute; top: 75px; left: -2px; z-index: 10000; width: 75px;"`;
+		const img = $(`<img src="${Potree.resourcePath}/icons/p360_compass_ring_orange.svg" ${style} />`);
 
 		return img;
 	}
+	
 
 };
