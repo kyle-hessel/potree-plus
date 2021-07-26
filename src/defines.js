@@ -52,5 +52,5 @@ export const TreeType = {
 export const LengthUnits = {
 	METER: {code: 'm', unitspermeter: 1.0},
 	FEET: {code: 'ft', unitspermeter: 3.280833333},
-	INCH: {code: '\u2033', unitspermeter: 39.3701}
+	INCH: {code: 'in', unitspermeter: 39.369999996}
 };
