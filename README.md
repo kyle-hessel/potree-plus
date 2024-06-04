@@ -1,3 +1,9 @@
+# Potree Plus
+
+Potree Plus is a modification of the open source Potree point cloud viewer that adds highly requested features such 
+as lateral and multi-measuring tools, elevation markers, and sprinting to Potree's user interface and experience.
+
+The feature set can be seen in this video (https://youtu.be/J4_WQ6OsuOc) at the 10:00 mark.
 
 # About
 
